@@ -151,7 +151,7 @@ def processSquare(x, a):
 
     # find start of square, sequence is 
     # s, s+1, s+2, s+9, s+10, s+11, s+18, s+19, s+20
-    s = ((x // 27) * 9) + (((x % 9) // 3) * 3)
+    s = ((x // 27) * 27) + (((x % 9) // 3) * 3)
     #print(f"Processing square for element {x} start is {s}")
     seq = [s, s+1, s+2, s+9, s+10, s+11, s+18, s+19, s+20]
     for i in seq:
