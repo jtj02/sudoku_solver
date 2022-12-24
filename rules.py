@@ -1,14 +1,36 @@
+import prettyPrint
+
 # these rules test row, column and square to work out if
 # a square is the only one that could hold a given value
 
 def only(seq, x, a):
+    # step through sequence and eleminant any possibilities
+    # from square x that are possible elsewhere
+    # if we are left with one value then return
+    # altered a
+
+    v = a[x].copy()
+    for i in seq:
+        if i == x:
+            continue
+
+        if len(v) == 0:
+            # i.e. no candidates left then stop
+            break
+
+        for n in a[i]:
+            if n in v:
+                v.remove(n)
+
+    if len(v) == 1:
+        # we have a value
+        a[x] = v
+
     return a
 
-        # what to do
 
 def subtraction(seq, x, a):
     for i in seq:
-        #print(f"i is {i}")
         if i == x:
             continue
         if len(a[i]) == 1:
@@ -17,6 +39,7 @@ def subtraction(seq, x, a):
             if c in a[x]:
                 a[x].remove(c)
                 if len(a[x]) == 0:
+                    prettyPrint.debugPrint(a)
                     raise Exception(f"Error, removed {c} from index {x}")
 
     return a
