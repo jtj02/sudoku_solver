@@ -45,6 +45,11 @@ def pprint(s):
     print(DHB * 37)
 
 
+def debugPrint(a):
+    for y in range(9):
+        print(f"{y*9}:", a[y*9:(y*9)+9])
+
+
 def parseRow(r):
     if len(r) != 9:
         print(f"Error, incorrect number of characters for a line, need 9 you entered {len(r)}", file=sys.stderr)
@@ -123,7 +128,7 @@ def processRow(x, a):
 
     # find start of row, end is start + 9
     row = (x // 9) * 9
-    print(f"Processing {a[row:row+9]}")
+    #print(f"Processing {a[row:row+9]}")
     for i in range(row, row+9):
         if i == x:
             continue
@@ -132,12 +137,35 @@ def processRow(x, a):
             # remove from a[x]
             if c in a[x]:
                 a[x].remove(c)
+                if len(a[x]) == 0:
+                    raise Exception(f"Error, removed {c} from index {x}")
 
-    print(f"Got        {a[row:row+9]}")
+    #print(f"Got        {a[row:row+9]}")
     return a
 
 
-def processSquare(i, a):
+def processSquare(x, a):
+    # if already a single value then nothing to do
+    if len(a[x]) == 1:
+        return a
+
+    # find start of square, sequence is 
+    # s, s+1, s+2, s+9, s+10, s+11, s+18, s+19, s+20
+    s = ((x // 27) * 9) + (((x % 9) // 3) * 3)
+    #print(f"Processing square for element {x} start is {s}")
+    seq = [s, s+1, s+2, s+9, s+10, s+11, s+18, s+19, s+20]
+    for i in seq:
+        #print(f"i is {i}")
+        if i == x:
+            continue
+        if len(a[i]) == 1:
+            c = a[i][0]
+            # remove from a[x]
+            if c in a[x]:
+                a[x].remove(c)
+                if len(a[x]) == 0:
+                    raise Exception(f"Error, removed {c} from index {x}")
+
     return a
 
 
@@ -149,9 +177,8 @@ def processColumn(x, a):
     # find start of column, subsequent values
     # are col+9, end is col+(9*8)
     col = x % 9
-    #print(f"Processing {a[row:row+9]}")
     for i in range(col, col+72+1, 9):
-        print(f"Index {i}")
+        #print(f"Index {i}")
         if i == x:
             continue
         if len(a[i]) == 1:
@@ -159,6 +186,9 @@ def processColumn(x, a):
             # remove from a[x]
             if c in a[x]:
                 a[x].remove(c)
+                if len(a[x]) == 0:
+                    debugPrint(a)
+                    raise Exception(f"Error, removed {c} from {i} from index {x}")
 
     #print(f"Got        {a[row:row+9]}")
     return a
@@ -182,11 +212,20 @@ if len(sys.argv) > 2:
 pprint(a)
 
 # now the work!
+for j in range(10):
+    for i in range(81):
+        b = processRow(i, a)
+        c = processSquare(i, b)
+        d = processColumn(i, c)
+        a = d
 
-for i in range(81):
-    b = processRow(i, a)
-    c = processSquare(i, b)
-    d = processColumn(i, c)
-    a = d
+    squaresDone = 0
+    for i in range(81):
+        if len(a[i]) == 1:
+            squaresDone += 1
 
-pprint(d)
+    print(f"{squaresDone} squares complete")
+    pprint(d)
+
+debugPrint(a)
+
