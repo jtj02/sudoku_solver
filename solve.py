@@ -15,6 +15,39 @@ def init():
     return s
 
 
+def countSquaresComplete(a):
+    # Count how many squares out of a possible
+    # 81 have been finalised
+    count = 0
+    for i in range(81):
+        if len(a[i]) == 1:
+            count += 1
+
+    return count
+
+def applyRules(a):
+    # apply rules to a until either complete
+    # or no more progress being made
+
+    # if complete then just return
+    squaresDone = countSquaresComplete(a)
+    if squaresDone == 81:
+        return a
+
+    # remember current state to measure progress
+    lastSquaresDone = 0
+    while squaresDone != 81 and squaresDone != lastSquaresDone:
+        # apply rules
+        for i in range(81):
+            a = rules.processRow(i, a)
+            a = rules.processSquare(i, a)
+            a = rules.processColumn(i, a)
+
+        lastSquaresDone = squaresDone
+        squaresDone = countSquaresComplete(a)
+
+    return a
+
 
 
 # start the program
@@ -34,23 +67,13 @@ if len(sys.argv) > 2:
 prettyPrint.pprint(a)
 
 # now the work!
-lastSquaresDone = -1
-squaresDone = 0
-while squaresDone != lastSquaresDone and squaresDone != 81:
-    for i in range(81):
-        b = rules.processRow(i, a)
-        c = rules.processSquare(i, b)
-        d = rules.processColumn(i, c)
-        a = d
 
-    lastSquaresDone = squaresDone
-    squaresDone = 0
-    for i in range(81):
-        if len(a[i]) == 1:
-            squaresDone += 1
+# apply the rules until exhausted
+a = applyRules(a)
+squaresComplete = countSquaresComplete(a)
+print(f"{squaresComplete} squares complete")
+prettyPrint.pprint(a)
 
-    print(f"{squaresDone} squares complete")
-    prettyPrint.pprint(d)
-
-prettyPrint.debugPrint(a)
+if squaresComplete != 81:
+    prettyPrint.debugPrint(a)
 
