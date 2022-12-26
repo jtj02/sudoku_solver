@@ -25,16 +25,16 @@ def deepCopy(a):
 
 
 def check(seq, a):
-    # run through sequence of squares and make sure
+    # run through the matrix and make sure
     # rules have not been violated for assigned squares
     # by checking same number has not been applied more
-    # than once
+    # than once in columns, rows and squares
     v = []
     for i in seq:
         if len(a[i]) > 1:
             continue
 
-        # if no possibilities then somethign wrong
+        # if no possibilities then something wrong
         if len(a[i]) == 0:
             return False
 
@@ -85,6 +85,7 @@ def countSquaresComplete(a):
 def applyRules(a):
     # apply rules to a until either complete
     # or no more progress being made
+    # raise exception if there is no solution detected
 
     # if complete then just return
     squaresDone = countSquaresComplete(a)
