@@ -54,8 +54,16 @@ def processRow(x, a):
     row = (x // 9) * 9
     seq = range(row, row+9)
 
+    #if x == 67:
+    #    print("Before")
+    #    prettyPrint.debugPrint(a)
+
     a = subtraction(seq, x, a)
     a = only(seq, x, a)
+    #if x == 67:
+    #    print("Before")
+    #    prettyPrint.debugPrint(a)
+
     return a
 
 def processColumn(x, a):
@@ -67,8 +75,16 @@ def processColumn(x, a):
     col = x % 9
     seq = range(col, col+72+1, 9)
 
+    #if x == 67:
+    #    print("Before")
+    #    prettyPrint.debugPrint(a)
+
     a = subtraction(seq, x, a)
     a = only(seq, x, a)
+    #if x == 67:
+    #    print("After")
+    #    prettyPrint.debugPrint(a)
+
     return a
 
 
@@ -83,6 +99,16 @@ def processSquare(x, a):
     #print(f"Processing square for element {x} start is {s}")
     seq = [s, s+1, s+2, s+9, s+10, s+11, s+18, s+19, s+20]
 
+    #if x == 57:
+    #    print("Before")
+    #    prettyPrint.debugPrint(a)
+
     a = subtraction(seq, x, a)
+    #if x == 57:
+    #    print("After subtraction")
+    #    prettyPrint.debugPrint(a)
     a = only(seq, x, a)
+    #if x == 57:
+    #    print("After only")
+    #    prettyPrint.debugPrint(a)
     return a
