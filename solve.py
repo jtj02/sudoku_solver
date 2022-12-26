@@ -127,7 +127,6 @@ def applyRules(a):
     return a
 
 
-
 # start the program
 if len(sys.argv) == 1:
     # get start from user input
