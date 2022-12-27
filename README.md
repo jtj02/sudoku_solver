@@ -20,6 +20,6 @@ Just needs Python3 no external modules required.
 
 ## Author
 
-jtj02 - for all code
+`jtj02` - for all code
 
-Various web sites for example puzzles.
+Various web sites - example puzzles
