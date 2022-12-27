@@ -1,5 +1,5 @@
 # sudoku_solver
-Python code to solve Sudoku puzzles. Written as a distraction while recovering from surgery. All my own work except for sample Sudoku puzzles (the `.txt` files) that were copied from random web sites to use as tests.:w
+Python code to solve Sudoku puzzles. Written as a distraction while recovering from surgery. All my own work except for sample Sudoku puzzles (the `.txt` files) that were copied from random web sites to use as tests.
 
 
 ## How to use
