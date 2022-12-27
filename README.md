@@ -14,6 +14,10 @@ Running without filename argument should prompt you for manual entry of the star
 
 The manual entry has not been tested nearly as much as providing a filename argument so you may stumble up against a bug
 
+## Prerequistes
+
+Just needs Python3 no external modules required.
+
 ## Author
 
 jtj02 - for all code
