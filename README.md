@@ -14,6 +14,10 @@ Running without filename argument should prompt you for manual entry of the star
 
 The manual entry has not been tested nearly as much as providing a filename argument so you may stumble up against a bug
 
+## Puzzle File Format
+
+Has to be 9 lines with 9 characters per line. No trialing newline at the end.
+
 ## Prerequistes
 
 Just needs Python3 no external modules required.
